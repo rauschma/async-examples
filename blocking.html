@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Blocking</title>
+</head>
+<body>
+    <a id="block" href="">Block</a>
+    <div id="statusMessage"></div>
+    <button>Do nothing</button>
+    <script>
+        document.getElementById('block').addEventListener('click', onClick);
+
+        function onClick(event) {
+            setStatus('Blocking...');
+            event.preventDefault();
+            setTimeout(function () {
+                sleep(5000);
+                setStatus('Done');
+            }, 0);
+        }
+        function sleep(milliseconds) {
+            var start = Date.now();
+            while ((Date.now() - start) < milliseconds);
+        }
+        function setStatus(status) {
+            document.getElementById('statusMessage').textContent = status;
+        }
+    </script>
+</body>
+</html>
+
