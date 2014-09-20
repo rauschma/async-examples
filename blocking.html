@@ -5,18 +5,21 @@
     <title>Blocking</title>
 </head>
 <body>
-    <a id="block" href="">Block</a>
-    <div id="statusMessage"></div>
-    <button>Do nothing</button>
+    <b>Demo:</b> You can’t click the button while the browser process is blocked.
+    <p>
+    <a id="block" href="">Start blocking</a>
+    <span id="statusMessage"></span>
+    <p>
+    <button>Simple button</button>
     <script>
         document.getElementById('block').addEventListener('click', onClick);
 
         function onClick(event) {
-            setStatus('Blocking...');
+            setStatus('[Blocking...]');
             event.preventDefault();
             setTimeout(function () {
                 sleep(5000);
-                setStatus('Done');
+                setStatus('[Done]');
             }, 0);
         }
         function sleep(milliseconds) {
@@ -29,4 +32,3 @@
     </script>
 </body>
 </html>
-
