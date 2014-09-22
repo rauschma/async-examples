@@ -37,7 +37,7 @@
             var count = 0;
             function callAfterSecondNotification() {
                 count++;
-                if (count < 2) {
+                if (count < 3) {
                     requestAnimationFrame(callAfterSecondNotification);
                 } else {
                     callback();
