@@ -34,16 +34,17 @@
             statusElt.textContent = status;
         }
         function afterLayout(callback) {
-            var count = 0;
-            function callAfterSecondNotification() {
-                count++;
-                if (count < 3) {
-                    requestAnimationFrame(callAfterSecondNotification);
+            var count = 3; // Firefox seems to need three invocations
+            function countDownInvocations() {
+                count--;
+                // Firefox seems to need three triggers
+                if (count > 0) {
+                    requestAnimationFrame(countDownInvocations);
                 } else {
                     callback();
                 }
             }
-            requestAnimationFrame(callAfterSecondNotification);
+            requestAnimationFrame(countDownInvocations);
         }
     </script>
 </body>
