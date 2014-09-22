@@ -20,7 +20,7 @@
 
             setStatus('[Blocking...]');
             // Make sure that status is displayed *before* sleeping
-            afterRefresh(function () {
+            afterLayout(function () {
                 sleep(5000);
                 setStatus('[Done]');
             });
@@ -33,7 +33,7 @@
             var statusElt = document.getElementById('statusMessage');
             statusElt.textContent = status;
         }
-        function afterRefresh(callback) {
+        function afterLayout(callback) {
             var count = 0;
             function callAfterSecondNotification() {
                 count++;
