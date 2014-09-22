@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Blocking</title>
+</head>
+<body>
+    <b>Demo:</b> You can’t click the button while the browser process is blocked.
+    <p>
+    <a id="block" href="">Block for 5 seconds</a>
+    <span id="statusMessage"></span>
+    <p>
+    <button>Simple button</button>
+    <script>
+        document.getElementById('block')
+        .addEventListener('click', onClick);
+
+        function onClick(event) {
+            event.preventDefault();
+
+            setStatus('[Blocking...]');
+            // Make sure that status is displayed *before* sleeping
+            afterRefresh(function () {
+                sleep(5000);
+                setStatus('[Done]');
+            });
+        }
+        function sleep(milliseconds) {
+            var start = Date.now();
+            while ((Date.now() - start) < milliseconds);
+        }
+        function setStatus(status) {
+            var statusElt = document.getElementById('statusMessage');
+            statusElt.textContent = status;
+        }
+        function afterRefresh(callback) {
+            var count = 0;
+            function callAfterSecondNotification() {
+                count++;
+                if (count < 2) {
+                    requestAnimationFrame(callAfterSecondNotification);
+                } else {
+                    callback();
+                }
+            }
+            requestAnimationFrame(callAfterSecondNotification);
+        }
+    </script>
+</body>
+</html>

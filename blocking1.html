@@ -12,11 +12,15 @@
     <p>
     <button>Simple button</button>
     <script>
-        document.getElementById('block').addEventListener('click', onClick);
+        document.getElementById('block')
+        .addEventListener('click', onClick);
 
         function onClick(event) {
-            setStatus('[Blocking...]');
             event.preventDefault();
+
+            setStatus('[Blocking...]');
+            // Use setTimeout() so that the status is displayed
+            // *before* sleeping
             setTimeout(function () {
                 sleep(5000);
                 setStatus('[Done]');
@@ -27,7 +31,8 @@
             while ((Date.now() - start) < milliseconds);
         }
         function setStatus(status) {
-            document.getElementById('statusMessage').textContent = status;
+            var statusElt = document.getElementById('statusMessage');
+            statusElt.textContent = status;
         }
     </script>
 </body>
