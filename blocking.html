@@ -7,8 +7,9 @@
 <body>
     <b>Demo:</b> You can’t click the button while the browser process is blocked.
     <p>
+    Tip: Open the console to see status updates (provided via <code>console.log()</code>).
+    <p>
     <a id="block" href="">Block for 5 seconds</a>
-    <span id="statusMessage"></span>
     <p>
     <button>Simple button</button>
     <script>
@@ -18,21 +19,13 @@
         function onClick(event) {
             event.preventDefault();
 
-            setStatus('[Blocking...]');
-            // Use setTimeout() so that the status is displayed
-            // *before* sleeping
-            setTimeout(function () {
-                sleep(5000);
-                setStatus('[Done]');
-            }, 0);
+            console.log('Blocking...');
+            sleep(5000);
+            console.log('Done');
         }
         function sleep(milliseconds) {
             var start = Date.now();
             while ((Date.now() - start) < milliseconds);
-        }
-        function setStatus(status) {
-            var statusElt = document.getElementById('statusMessage');
-            statusElt.textContent = status;
         }
     </script>
 </body>
