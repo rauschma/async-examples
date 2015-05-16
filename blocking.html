@@ -5,13 +5,12 @@
     <title>Blocking</title>
 </head>
 <body>
-    <b>Demo:</b> You can’t click the button while the browser process is blocked.
-    <p>
-    Tip: Open the console to see status updates (provided via <code>console.log()</code>).
+    <b>Demo (<a href="https://github.com/rauschma/async-examples">GitHub repo</a>):</b> You can’t click the button while the browser process is blocked.
     <p>
     <a id="block" href="">Block for 5 seconds</a>
     <p>
-    <button>Simple button</button>
+    <button>This is a button</button>
+    <div id="statusMessage"></div>
     <script>
         document.getElementById('block')
         .addEventListener('click', onClick);
@@ -19,11 +18,18 @@
         function onClick(event) {
             event.preventDefault();
 
-            console.log('Blocking...');
-            sleep(5000);
-            console.log('Done');
+            setStatusMessage('Blocking...');
+
+            // Give browser the opportunity to display status message
+            setTimeout(function () {
+                blockMainThread(5000);
+                setStatusMessage('Done');
+            }, 0);
         }
-        function sleep(milliseconds) {
+        function setStatusMessage(msg) {
+            document.getElementById('statusMessage').textContent = msg;
+        }
+        function blockMainThread(milliseconds) {
             var start = Date.now();
             while ((Date.now() - start) < milliseconds);
         }
