@@ -20,16 +20,17 @@
 
             setStatusMessage('Blocking...');
 
-            // Give browser the opportunity to display status message
+            // Call setTimeout(), so that browser has time to display
+            // status message
             setTimeout(function () {
-                blockMainThread(5000);
+                sleep(5000);
                 setStatusMessage('Done');
             }, 0);
         }
         function setStatusMessage(msg) {
             document.getElementById('statusMessage').textContent = msg;
         }
-        function blockMainThread(milliseconds) {
+        function sleep(milliseconds) {
             var start = Date.now();
             while ((Date.now() - start) < milliseconds);
         }
